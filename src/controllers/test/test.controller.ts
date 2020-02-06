@@ -1,7 +1,8 @@
-import { Controller, Get, Req, Post, Put, Delete, Param, Body } from '@nestjs/common';
+import { Controller, Get, Req, Post, Put, Delete, Param, Body, Query } from '@nestjs/common';
 import { AppService } from 'src/app.service';
 import { ApiParam } from '@nestjs/swagger';
 import { CreateTestDto } from 'src/models/test.dto';
+import { FilterDto } from 'src/models/filter.dto';
 
 @Controller('test')
 export class TestController {
@@ -9,11 +10,11 @@ export class TestController {
 
     @Post()
     create(@Body() createTestDto: CreateTestDto): string {
-        return 'This action adds a new test';
+        return 'This action adds a new test ' + JSON.stringify(createTestDto);
     }
 
     @Get()
-    findAll(): string {
+    findAll(@Query() query: FilterDto): string {
         return 'This action returns all tests';
     }
 
