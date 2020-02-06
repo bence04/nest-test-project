@@ -1,13 +1,14 @@
-import { Controller, Get, Req, Post, Put, Delete, Param } from '@nestjs/common';
+import { Controller, Get, Req, Post, Put, Delete, Param, Body } from '@nestjs/common';
 import { AppService } from 'src/app.service';
 import { ApiParam } from '@nestjs/swagger';
+import { CreateTestDto } from 'src/models/test.dto';
 
 @Controller('test')
 export class TestController {
     constructor(private readonly appService: AppService) { }
 
     @Post()
-    create(): string {
+    create(@Body() createTestDto: CreateTestDto): string {
         return 'This action adds a new test';
     }
 
