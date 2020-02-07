@@ -1,12 +1,11 @@
 import { Controller, Get, Req, Post, Put, Delete, Param, Body, Query } from '@nestjs/common';
-import { AppService } from 'src/app.service';
 import { ApiParam } from '@nestjs/swagger';
-import { CreateTestDto } from 'src/models/test.dto';
-import { FilterDto } from 'src/models/filter.dto';
+import { CreateTestDto } from 'src/api/models/test.dto';
+import { FilterDto } from 'src/api/models/filter.dto';
 
 @Controller('test')
 export class TestController {
-    constructor(private readonly appService: AppService) { }
+    constructor() { }
 
     @Post()
     create(@Body() createTestDto: CreateTestDto): string {
