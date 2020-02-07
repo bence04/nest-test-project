@@ -1,20 +1,22 @@
-import { Controller, Get, Req, Post, Put, Delete, Param, Body, Query } from '@nestjs/common';
-import { ApiParam } from '@nestjs/swagger';
-import { CreateTestDto } from 'src/api/models/test.dto';
+import { Controller, Get, Req, Post, Put, Delete, Param, Body, Query, HttpStatus } from '@nestjs/common';
+import { ApiParam, ApiTags } from '@nestjs/swagger';
+import { CreateTestDto, TestDto } from 'src/api/models/test.dto';
 import { FilterDto } from 'src/api/models/filter.dto';
+import { TestService } from 'src/api/services/test.service';
 
+@ApiTags('test')
 @Controller('test')
 export class TestController {
-    constructor() { }
+    constructor(private testService: TestService) { }
 
     @Post()
-    create(@Body() createTestDto: CreateTestDto): string {
-        return 'This action adds a new test ' + JSON.stringify(createTestDto);
+    create(@Body() createTestDto: CreateTestDto): HttpStatus {
+        return this.testService.create(createTestDto);
     }
 
     @Get()
-    findAll(@Query() query: FilterDto): string {
-        return 'This action returns all tests';
+    findAll(@Query() query: FilterDto): TestDto[] {
+        return this.testService.findAll();
     }
 
     @Put(':id')
